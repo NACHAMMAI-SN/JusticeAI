@@ -267,7 +267,7 @@ Frontend runs on http://localhost:5173
 
 ---
 
-## Credits & Acknowledgements
+
 
 
 - [HuggingFace](https://huggingface.co) for DistilBERT model
