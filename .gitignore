@@ -1,0 +1,44 @@
+
+
+# Environment variables (NEVER commit these)
+.env
+**/.env
+Server/.env
+App/project/.env
+
+# Supabase
+supabase.js
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+Server/venv/
+
+# Node
+node_modules/
+node_modules
+App/project/node_modules/
+
+# Model files (too large for GitHub)
+Server/models/intent_classifier.pt
+
+# Cache
+.cache/
+*.cache
+__pycache__
+
+# Build outputs
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
