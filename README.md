@@ -170,7 +170,7 @@ JusticeAI/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/JusticeAI.git
+git clone https://github.com/NACHAMMAI-SN/JusticeAI.git
 cd JusticeAI
 ```
 
