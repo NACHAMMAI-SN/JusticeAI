@@ -15,7 +15,6 @@ DistilBERT model for intent classification and a RAG pipeline
 combining Pinecone vector search with Groq LLM for accurate
 legal responses.
 
-**Repository:** [github.com/NACHAMMAI-SN/JusticeAI](https://github.com/NACHAMMAI-SN/JusticeAI)
 
 ---
 
