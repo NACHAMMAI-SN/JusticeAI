@@ -15,6 +15,8 @@ DistilBERT model for intent classification and a RAG pipeline
 combining Pinecone vector search with Groq LLM for accurate
 legal responses.
 
+**Repository:** [github.com/NACHAMMAI-SN/JusticeAI](https://github.com/NACHAMMAI-SN/JusticeAI)
+
 ---
 
 ##  Deep Learning Architecture
@@ -33,6 +35,158 @@ graph TD
     A --> H
     H --> K[ Final Response to User]
 ```
+
+---
+
+## 🧠 Deep Learning Model Comparison
+
+### BERT-based Models (Transformer Architecture)
+
+| Model | Architecture | Val Accuracy | Val Loss |
+|-------|--------------|--------------|----------|
+| Legal-BERT + MLP | Legal-BERT → CLS token → 768→512→256→3 | 100.00% | 0.02 |
+| DistilBERT + MLP | DistilBERT → CLS token → 768→256→3 | 100.00% | 0.03 |
+| BERT-base + MLP | BERT → Mean Pooling → 768→512→128→7 | 100.00% | 0.02 |
+
+### RNN-based Models (Sequential Architecture)
+
+| Model | Optimizer | Val Accuracy | Val Loss | Epochs |
+|-------|-----------|--------------|----------|--------|
+| BidirectionalLSTM | Adam | 100.00% | 0.0002 | 20 |
+| BidirectionalLSTM | AdamW | 100.00% | 0.0002 | 20 |
+| LSTM | Adam | 98.89% | 0.0472 | 14 |
+| LSTM | AdamW | 97.78% | 0.0761 | 15 |
+| StackedLSTM | Adam | 97.78% | 0.1326 | 12 |
+| StackedLSTM | AdamW | 97.78% | 0.1281 | 8 |
+| BidirectionalLSTM | SGD | 96.67% | 0.0726 | 20 |
+| SimpleRNN | AdamW | 91.11% | 0.3140 | 10 |
+| SimpleRNN | Adam | 88.89% | 0.3551 | 10 |
+| SimpleRNN | SGD | 83.33% | 0.5571 | 14 |
+| LSTM | SGD | 78.89% | 0.5340 | 20 |
+| StackedLSTM | SGD | 31.11% | 1.1002 | 6 |
+
+### 🏆 Best Model
+
+**BidirectionalLSTM with Adam optimizer** achieved **100% validation accuracy** matching the performance of BERT-based Transformer models.
+
+### Key Findings
+
+- BiLSTM reads text both forward AND backward, capturing full context
+- Adam and AdamW optimizers significantly outperform SGD for all models
+- SGD fails completely on StackedLSTM (31.11%) due to vanishing gradients
+- LSTM family consistently outperforms SimpleRNN on legal text
+- Transformer models (BERT) converge faster but BiLSTM matches final accuracy
+
+---
+
+## 📊 Training Results & Graphs
+
+### Validation Accuracy per Epoch — All RNN Variants
+
+![RNN Accuracy per Epoch](Server/models/rnn_accuracy_per_epoch.png)
+
+### Validation Loss per Epoch — All RNN Variants
+
+![RNN Loss per Epoch](Server/models/rnn_loss_per_epoch.png)
+
+### Best Accuracy by Model and Optimizer
+
+![RNN Best Accuracy Comparison](Server/models/rnn_best_accuracy_comparison.png)
+
+### Final Model Comparison — RNN vs BERT
+
+![Final Model Comparison](Server/models/final_model_comparison.png)
+
+---
+
+## 🔬 Running the RNN Comparison
+
+To reproduce all RNN experiments:
+
+```bash
+cd Server
+python rnn_comparison.py
+```
+
+This will:
+
+- Load LEDGAR dataset from HuggingFace automatically
+- Train 12 models (4 architectures × 3 optimizers)
+- Save all results to Server/models/ folder
+- Generate all comparison graphs
+- Print best model at the end
+
+Requirements:
+
+```bash
+pip install datasets torch matplotlib
+```
+
+Expected runtime: ~10 minutes on CPU
+
+---
+
+## 🏗️ Complete System Architecture
+
+End-to-end flow from user query to response (production stack):
+
+```mermaid
+flowchart TD
+    A[User Query - any Indian language] --> B[Language Detection - franc]
+    B --> C[Intent Classification]
+    C --> C1[Legal-BERT + MLP Head]
+    C1 --> C2[fine-tuned on LEDGAR]
+    C2 --> C3[3 classes: Personal & Family, Business & Criminal, Consultation]
+    C3 --> D[RAG Pipeline]
+    D --> D1[Sentence Transformer - multilingual MiniLM]
+    D1 --> D2[384-dim embeddings]
+    D2 --> D3[Pinecone Vector Search]
+    D3 --> D4[top-3 relevant laws]
+    D4 --> E[Response Generation]
+    E --> E1[Groq LLaMA 3.3 70B]
+    E1 --> E2[Retrieved Legal Context + Conversation History]
+    E2 --> F[Final Response - user's language]
+```
+
+<details>
+<summary>ASCII overview (same flow)</summary>
+
+```
+User Query (any Indian language)
+        ↓
+   Language Detection (franc)
+        ↓
+   Intent Classification
+   ┌─────────────────────────────┐
+   │  Legal-BERT + MLP Head      │
+   │  (fine-tuned on LEDGAR)     │
+   │  3 classes:                 │
+   │  • Personal & Family        │
+   │  • Business & Criminal      │
+   │  • Consultation             │
+   └─────────────────────────────┘
+        ↓
+   RAG Pipeline
+   ┌─────────────────────────────┐
+   │  Sentence Transformer       │
+   │  (multilingual MiniLM)      │
+   │  → 384-dim embeddings       │
+   │        ↓                    │
+   │  Pinecone Vector Search     │
+   │  (top-3 relevant laws)      │
+   └─────────────────────────────┘
+        ↓
+   Response Generation
+   ┌─────────────────────────────┐
+   │  Groq LLaMA 3.3 70B        │
+   │  + Retrieved Legal Context  │
+   │  + Conversation History     │
+   └─────────────────────────────┘
+        ↓
+   Final Response (user's language)
+```
+
+</details>
 
 ---
 
@@ -267,9 +421,9 @@ Frontend runs on http://localhost:5173
 
 ---
 
+## Credits & Acknowledgements
 
-
-
+- Original [LawPal](https://github.com/AaryanGole26/LawPal) repo by [@AaryanGole26](https://github.com/AaryanGole26)
 - [HuggingFace](https://huggingface.co) for DistilBERT model
 - [LEDGAR Dataset](https://huggingface.co/datasets/coastalcph/lex_glue) for intent classifier training
 - [Groq](https://groq.com) for LLM API
