@@ -2,8 +2,7 @@
 Standalone RNN vs BERT comparison on LEDGAR (top-3 labels).
 Run from Server/:  python rnn_comparison.py
 
-Does not import or modify any other project modules.
-Outputs only to models/rnn_* (does not touch intent_classifier.pt).
+
 """
 
 from __future__ import annotations
