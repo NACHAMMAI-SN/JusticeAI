@@ -38,7 +38,7 @@ graph TD
 
 ---
 
-## 🧠 Deep Learning Model Comparison
+## Deep Learning Model Comparison
 
 ### BERT-based Models (Transformer Architecture)
 
@@ -65,7 +65,7 @@ graph TD
 | LSTM | SGD | 78.89% | 0.5340 | 20 |
 | StackedLSTM | SGD | 31.11% | 1.1002 | 6 |
 
-### 🏆 Best Model
+### Best Model
 
 **BidirectionalLSTM with Adam optimizer** achieved **100% validation accuracy** matching the performance of BERT-based Transformer models.
 
@@ -79,7 +79,7 @@ graph TD
 
 ---
 
-## 📊 Training Results & Graphs
+## Training Results & Graphs
 
 ### Validation Accuracy per Epoch — All RNN Variants
 
@@ -99,7 +99,7 @@ graph TD
 
 ---
 
-## 🔬 Running the RNN Comparison
+## Running the RNN Comparison
 
 To reproduce all RNN experiments:
 
@@ -126,7 +126,7 @@ Expected runtime: ~10 minutes on CPU
 
 ---
 
-## 🏗️ Complete System Architecture
+## Complete System Architecture
 
 End-to-end flow from user query to response (production stack):
 
@@ -421,9 +421,8 @@ Frontend runs on http://localhost:5173
 
 ---
 
-## Credits & Acknowledgements
 
-- Original [LawPal](https://github.com/AaryanGole26/LawPal) repo by [@AaryanGole26](https://github.com/AaryanGole26)
+
 - [HuggingFace](https://huggingface.co) for DistilBERT model
 - [LEDGAR Dataset](https://huggingface.co/datasets/coastalcph/lex_glue) for intent classifier training
 - [Groq](https://groq.com) for LLM API
