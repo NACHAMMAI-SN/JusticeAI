@@ -46,4 +46,4 @@ for i, text in enumerate(legal_texts):
 
 print("Uploading to Pinecone...")
 index.upsert(vectors=vectors)
-print(f"✅ Successfully uploaded {len(vectors)} legal documents to Pinecone!")
+print(f" Successfully uploaded {len(vectors)} legal documents to Pinecone!")

@@ -1,0 +1,16 @@
+Model                        | Optimizer  |   Best Val Acc |  Best Val Loss |   Epochs
+----------------------------------------------------------------------------------------------------
+BidirectionalLSTM            | Adam       |         1.0000 |         0.0002 |       20
+BidirectionalLSTM            | AdamW      |         1.0000 |         0.0002 |       20
+LSTM                         | Adam       |         0.9889 |         0.0472 |       14
+LSTM                         | AdamW      |         0.9778 |         0.0761 |       15
+StackedLSTM                  | Adam       |         0.9778 |         0.1326 |       12
+StackedLSTM                  | AdamW      |         0.9778 |         0.1281 |        8
+BidirectionalLSTM            | SGD        |         0.9667 |         0.0726 |       20
+SimpleRNN                    | AdamW      |         0.9111 |         0.3140 |       10
+SimpleRNN                    | Adam       |         0.8889 |         0.3551 |       10
+SimpleRNN                    | SGD        |         0.8333 |         0.5571 |       14
+LSTM                         | SGD        |         0.7889 |         0.5340 |       20
+StackedLSTM                  | SGD        |         0.3111 |         1.1002 |        6
+
+BEST (highest validation accuracy): BidirectionalLSTM + Adam — Val Accuracy: 100.00%
