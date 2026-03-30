@@ -236,8 +236,9 @@ User Query (any Indian language)
 
 ---
 
-## Project Structure
+Update the ## Project Structure section in README.md with this exact content:
 
+## Project Structure
 ```
 JusticeAI/
 ├── App/
@@ -256,16 +257,28 @@ JusticeAI/
 │       └── .env
 ├── Server/
 │   ├── app.py                        # Main Flask API
-│   ├── train.py                      # DistilBERT training script
+│   ├── train.py                      # BERT/DistilBERT training script
 │   ├── dl_intent_classifier.py       # Intent classifier model definition
 │   ├── dl_document_classifier.py     # Document classifier model definition
 │   ├── dl_training_pipeline.py       # Training pipeline utilities
+│   ├── rnn_comparison.py             # RNN vs BERT comparison experiments
 │   ├── populate_pinecone.py          # Pinecone data upload script
 │   ├── models/
-│   │   └── intent_classifier.pt      # Trained DistilBERT weights
+│   │   ├── intent_classifier.pt              # Trained DistilBERT weights
+│   │   ├── rnn_comparison.py                 # Standalone RNN experiment script
+│   │   ├── rnn_all_results.json              # All 12 RNN training results
+│   │   ├── rnn_summary_table.txt             # Model comparison summary
+│   │   ├── rnn_accuracy_per_epoch.png        # Accuracy curves graph
+│   │   ├── rnn_loss_per_epoch.png            # Loss curves graph
+│   │   ├── rnn_best_accuracy_comparison.png  # Best accuracy bar chart
+│   │   └── final_model_comparison.png        # RNN vs BERT final comparison
 │   ├── Dockerfile
 │   ├── Procfile
 │   └── requirements.txt
+├── SS/
+│   ├── SS_1.png                      # Landing page screenshot
+│   ├── SS_2.png                      # Features section screenshot
+│   └── SS_3.png                      # Chatbot interface screenshot
 ├── README.md
 └── .gitignore
 ```
