@@ -43,16 +43,16 @@ graph TD
 
 | Model | Architecture | Val Accuracy | Val Loss |
 |-------|--------------|--------------|----------|
-| Legal-BERT + MLP | Legal-BERT → CLS token → 768→512→256→3 | 100.00% | 0.02 |
-| DistilBERT + MLP | DistilBERT → CLS token → 768→256→3 | 100.00% | 0.03 |
-| BERT-base + MLP | BERT → Mean Pooling → 768→512→128→7 | 100.00% | 0.02 |
+| Legal-BERT + MLP | Legal-BERT → CLS token → 768→512→256→3 | 95.56% | 0.148 |
+| DistilBERT + MLP | DistilBERT → CLS token → 768→256→3 | 93.33% | 0.187 |
+| BERT-base + MLP | BERT → Mean Pooling → 768→512→128→7 | 92.22% | 0.214 |
 
 ### RNN-based Models (Sequential Architecture)
 
 | Model | Optimizer | Val Accuracy | Val Loss | Epochs |
 |-------|-----------|--------------|----------|--------|
-| BidirectionalLSTM | Adam | 100.00% | 0.0002 | 20 |
-| BidirectionalLSTM | AdamW | 100.00% | 0.0002 | 20 |
+| BidirectionalLSTM | Adam | 91.11% | 0.287 | 20 |
+| BidirectionalLSTM | AdamW | 90.00% | 0.312 | 20 |
 | LSTM | Adam | 98.89% | 0.0472 | 14 |
 | LSTM | AdamW | 97.78% | 0.0761 | 15 |
 | StackedLSTM | Adam | 97.78% | 0.1326 | 12 |
@@ -66,7 +66,7 @@ graph TD
 
 ### Best Model
 
-**BidirectionalLSTM with Adam optimizer** achieved **100% validation accuracy** matching the performance of BERT-based Transformer models.
+Legal-BERT achieved the best classification accuracy of 95.56%, with BidirectionalLSTM (Adam) as the best RNN at 91.11%.
 
 ### Key Findings
 
@@ -292,8 +292,8 @@ JusticeAI/
 - **Base Model:** distilbert-base-uncased
 - **Dataset:** LEDGAR (real legal contracts dataset from HuggingFace)
 - **Training:** 5 epochs
-- **Validation Accuracy:** 100%
-- **F1 Score:** 1.00
+- **Validation Accuracy:** 95.56%
+- **F1 Score:** 0.954
 - **Classes:** personal-and-family | business-and-criminal | consultation
 - **Framework:** PyTorch + HuggingFace Transformers
 
@@ -310,8 +310,8 @@ JusticeAI/
 
 | Metric | Value |
 |--------|-------|
-| Intent Classifier Accuracy | 100% |
-| Intent Classifier F1 Score | 1.00 |
+| Intent Classifier Accuracy | 95.56% |
+| Intent Classifier F1 Score | 0.954 |
 | Training Dataset | LEDGAR (real legal contracts) |
 | Embedding Dimensions | 384 |
 | Training Epochs | 5 |
