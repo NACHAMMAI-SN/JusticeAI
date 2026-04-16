@@ -236,7 +236,7 @@ User Query (any Indian language)
 
 ---
 
-Update the ## Project Structure section in README.md with this exact content:
+
 
 ## Project Structure
 ```
